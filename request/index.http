@@ -1,5 +1,0 @@
-@api = http://localhost:3001/api
-
-
-### Hello
-GET {{api}}/users/say-hello

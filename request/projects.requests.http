@@ -1,0 +1,29 @@
+@api = http://localhost:3001/api/projects
+
+
+### Get all projects
+GET {{api}}/all
+
+### Get  project by id
+GET {{api}}/8ecb9752-75c1-4c37-a32d-9775becffa18
+
+### Create project
+POST {{api}}/create
+Content-Type: application/json
+
+{
+    "name": "test project",
+    "description": "Testing projects resources"
+}
+
+### Update project
+PUT {{api}}/edit/8ecb9752-75c1-4c37-a32d-9775becffa18
+Content-Type: application/json
+
+{
+    "name": "Test project",
+    "description": "Testing projects endpoints"
+}
+
+### Delete project
+DELETE  {{api}}/delete/332f023a-0f5d-44fb-954b-9b8ea335d72b

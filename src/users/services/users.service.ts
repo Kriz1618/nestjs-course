@@ -1,69 +1,102 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { ErrorManager } from 'src/utils/error.manager';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
-import { UpdateUserDto, UserDto } from '../dto/user.dto';
+import { UserDto, UpdateUserDto, UserToProjectDTO } from '../dto/user.dto';
 import { UsersEntity } from '../entities/users.entity';
+import { UsersProjectsEntity } from '../entities/usersProjects.entity';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(UsersEntity)
-    private readonly userRepository: Repository<UsersEntity>
-  ) { }
-  getHello(): string {
-    return 'Hello World User!';
-  }
+    private readonly userRepository: Repository<UsersEntity>,
+    @InjectRepository(UsersProjectsEntity)
+    private readonly usersProjectsEntity: Repository<UsersProjectsEntity>,
+  ) {}
 
   public async createUser(body: UserDto): Promise<UsersEntity> {
     try {
       return await this.userRepository.save(body);
     } catch (error) {
-      throw new Error(error);
+      throw ErrorManager.createSignatureError(error.message);
     }
-  };
+  }
 
   public async findUsers(): Promise<UsersEntity[]> {
     try {
-      return await this.userRepository.find();
+      const users: UsersEntity[] = await this.userRepository.find();
+      if (users.length === 0) {
+        throw new ErrorManager({
+          type: 'BAD_REQUEST',
+          message: 'No records were found',
+        });
+      }
+      return users;
     } catch (error) {
-      throw new Error(error);
+      throw ErrorManager.createSignatureError(error.message);
     }
-  };
+  }
 
   public async findUserById(id: string): Promise<UsersEntity> {
     try {
-      return await this.userRepository
+      const user: UsersEntity = await this.userRepository
         .createQueryBuilder('user')
         .where({ id })
+        .leftJoinAndSelect('user.projectsIncludes', 'projectsIncludes')
+        .leftJoinAndSelect('projectsIncludes.project', 'project')
         .getOne();
-    } catch (error) {
-      throw new Error(error);
-    }
-  };
-
-  public async updateUser(id: string, body: UpdateUserDto): Promise<UpdateResult | null> {
-    try {
-      const user = await this.userRepository.update(id, body);
-
-      if (!user.affected) {
-        return null;
+      if (!user) {
+        throw new ErrorManager({
+          type: 'BAD_REQUEST',
+          message: 'No records were found',
+        });
       }
       return user;
     } catch (error) {
-      throw new Error(error);
+      throw ErrorManager.createSignatureError(error.message);
     }
-  };
+  }
 
-  public async deleteUser(id: string): Promise<DeleteResult | null> {
+  public async updateUser(
+    body: UpdateUserDto,
+    id: string,
+  ): Promise<UpdateResult | undefined> {
     try {
-      const user = await this.userRepository.delete(id);
-
-      if (!user.affected) {
-        return null;
+      const user: UpdateResult = await this.userRepository.update(id, body);
+      if (user.affected === 0) {
+        throw new ErrorManager({
+          type: 'BAD_REQUEST',
+          message: 'Record not updated',
+        });
       }
       return user;
     } catch (error) {
-      throw new Error(error);
+      throw ErrorManager.createSignatureError(error.message);
     }
-  };
-};
+  }
+
+  public async deleteUser(id: string): Promise<DeleteResult | undefined> {
+    try {
+      const user: DeleteResult = await this.userRepository.delete(id);
+      if (user.affected === 0) {
+        throw new ErrorManager({
+          type: 'BAD_REQUEST',
+          message: 'Record not deleted',
+        });
+      }
+      return user;
+    } catch (error) {
+      throw ErrorManager.createSignatureError(error.message);
+    }
+  }
+
+  
+  public async relationToProject(body: UserToProjectDTO){
+    try {
+      return await this.usersProjectsEntity.save(body);
+    } catch (error) {
+      throw ErrorManager.createSignatureError(error.message);
+    }
+  }
+}

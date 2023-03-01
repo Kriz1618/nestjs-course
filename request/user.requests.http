@@ -1,0 +1,54 @@
+@api = http://localhost:3001/api/users
+
+
+### Hello
+GET {{api}}/say-hello
+
+### Get all users
+GET {{api}}/all
+
+### Get all user by id
+GET {{api}}/b219a1d8-295f-4d9d-807d-0c05c29c8963
+
+### Create user
+POST {{api}}/register
+Content-Type: application/json
+
+{
+    "firstName": "John",
+    "lastName": "Doe",
+    "age": 33,
+    "email": "jhon.doe@yopmail.com",
+    "username": "john_doe",
+    "password": "admin",
+    "country": "Colombia",
+    "role": "ADMIN"
+}
+
+### Update user
+PUT {{api}}/edit/332f023a-0f5d-44fb-954b-9b8ea335d72b
+Content-Type: application/json
+
+{
+    "firstName": "John",
+    "lastName": "Doe",
+    "age": 34,
+    "email": "jhon.doe@yopmail.com",
+    "username": "john_doe",
+    "password": "admin",
+    "country": "Colombia",
+    "role": "ADMIN"
+}
+
+### Link to a project
+POST  {{api}}/add-to-project
+Content-Type: application/json
+
+{
+    "user": "b219a1d8-295f-4d9d-807d-0c05c29c8963",
+    "project": "8ecb9752-75c1-4c37-a32d-9775becffa18",
+    "accessLevel": 50
+}
+
+### Delete user
+DELETE  {{api}}/delete/332f023a-0f5d-44fb-954b-9b8ea335d72b

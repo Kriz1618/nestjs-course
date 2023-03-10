@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import * as bcrypt from 'bcrypt';
 import { ErrorManager } from 'src/utils/error.manager';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { UserDto, UpdateUserDto, UserToProjectDTO } from '../dto/user.dto';
@@ -13,11 +14,12 @@ export class UsersService {
     private readonly userRepository: Repository<UsersEntity>,
     @InjectRepository(UsersProjectsEntity)
     private readonly usersProjectsEntity: Repository<UsersProjectsEntity>,
-  ) {}
+  ) { }
 
   public async createUser(body: UserDto): Promise<UsersEntity> {
     try {
-      return await this.userRepository.save(body);
+      const password = await bcrypt.hash(body.password, +process.env.HASH_SALT);
+      return await this.userRepository.save({ ...body, password });
     } catch (error) {
       throw ErrorManager.createSignatureError(error.message);
     }
@@ -38,6 +40,19 @@ export class UsersService {
     }
   }
 
+  public async findBy({ key, value }: { key: keyof UserDto; value: any }) {
+    try {
+      const user: UsersEntity = await this.userRepository
+        .createQueryBuilder('user')
+        .addSelect('user.password')
+        .where({ [key]: value })
+        .getOne();
+
+      return user;
+    } catch (error) {
+      throw ErrorManager.createSignatureError(error.message);
+    }
+  }
   public async findUserById(id: string): Promise<UsersEntity> {
     try {
       const user: UsersEntity = await this.userRepository
@@ -91,8 +106,8 @@ export class UsersService {
     }
   }
 
-  
-  public async relationToProject(body: UserToProjectDTO){
+
+  public async relationToProject(body: UserToProjectDTO) {
     try {
       return await this.usersProjectsEntity.save(body);
     } catch (error) {

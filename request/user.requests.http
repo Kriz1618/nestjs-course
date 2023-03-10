@@ -8,7 +8,7 @@ GET {{api}}/say-hello
 GET {{api}}/all
 
 ### Get all user by id
-GET {{api}}/b219a1d8-295f-4d9d-807d-0c05c29c8963
+GET {{api}}/f3325365-6e94-463a-82bf-c7318776ba73
 
 ### Create user
 POST {{api}}/register
@@ -22,7 +22,7 @@ Content-Type: application/json
     "username": "john_doe",
     "password": "admin",
     "country": "Colombia",
-    "role": "ADMIN"
+    "role": "BASIC"
 }
 
 ### Update user
@@ -45,7 +45,7 @@ POST  {{api}}/add-to-project
 Content-Type: application/json
 
 {
-    "user": "b219a1d8-295f-4d9d-807d-0c05c29c8963",
+    "user": "f3325365-6e94-463a-82bf-c7318776ba73",
     "project": "8ecb9752-75c1-4c37-a32d-9775becffa18",
     "accessLevel": 50
 }

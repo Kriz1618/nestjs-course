@@ -1,16 +1,13 @@
 @api = http://localhost:3001/api/auth
 
 
-### Get all user by id
-GET {{api}}/f3325365-6e94-463a-82bf-c7318776ba73
-
 ### Login by username
 POST {{api}}/login
 Content-Type: application/json
 
 {
-    "username": "jhon.doe@yopmail.com",
-    "password": "admin2"
+    "username": "kriz",
+    "password": "admin"
 }
 
 ### Login by email

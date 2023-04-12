@@ -7,11 +7,17 @@ import {
   ParseUUIDPipe,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
+import { PublicAccess } from 'src/auth/decorators/public.decorator';
+import { Roles } from 'src/auth/decorators/roles.decorator';
+import { AuthGuard } from 'src/auth/guards/auth.guard';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { UserDto, UpdateUserDto, UserToProjectDTO } from '../dto/user.dto';
 import { UsersService } from '../services/users.service';
 
 @Controller('users')
+@UseGuards(AuthGuard, RolesGuard)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
@@ -20,11 +26,13 @@ export class UsersController {
     return await this.usersService.createUser(body);
   }
 
+  @Roles('ADMIN')
   @Get('all')
   public async findAllUsers() {
     return await this.usersService.findUsers();
   }
 
+  @PublicAccess()
   @Get(':id')
   public async findUserById(@Param('id',new ParseUUIDPipe()) id: string) {
     return await this.usersService.findUserById(id);

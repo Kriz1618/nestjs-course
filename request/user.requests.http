@@ -6,28 +6,31 @@ GET {{api}}/say-hello
 
 ### Get all users
 GET {{api}}/all
+x_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiQkFTSUMiLCJzdWIiOiJhYTI1NWExZC03OGUwLTQyYTMtOTUxZS0wNWRhZjMyMzEwMzAiLCJpYXQiOjE2ODEzMjkwMDMsImV4cCI6MTY4MTMzMjYwM30.dRFE3KGOmTmp2b8Gfl8IBXe4Ezqj4Llkm2qDbw_vHmo
 
-### Get all user by id
-GET {{api}}/f3325365-6e94-463a-82bf-c7318776ba73
+### Get user by id
+GET {{api}}/d9eef684-4c3f-4448-bd2c-eadacc8159a0
 
 ### Create user
 POST {{api}}/register
 Content-Type: application/json
 
 {
-    "firstName": "John",
-    "lastName": "Doe",
-    "age": 33,
-    "email": "jhon.doe@yopmail.com",
-    "username": "john_doe",
+    "firstName": "Kriz",
+    "lastName": "Marles",
+    "age": 32,
+    "email": "kriz.marles@yopmail.com",
+    "username": "kriz",
     "password": "admin",
     "country": "Colombia",
     "role": "BASIC"
 }
 
 ### Update user
-PUT {{api}}/edit/332f023a-0f5d-44fb-954b-9b8ea335d72b
+PUT {{api}}/edit/d9eef684-4c3f-4448-bd2c-eadacc8159a0
 Content-Type: application/json
+x_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiQkFTSUMiLCJzdWIiOiJmMzMyNTM2NS02ZTk0LTQ2M2EtODJiZi1jNzMxODc3NmJhNzMiLCJpYXQiOjE2NzkzNzE1MTcsImV4cCI6MTY3OTM3NTExN30.G_UhgX86H60pdESA5ear8K6iaTAmtahu1jITjtHNofE
+
 
 {
     "firstName": "John",
@@ -37,7 +40,7 @@ Content-Type: application/json
     "username": "john_doe",
     "password": "admin",
     "country": "Colombia",
-    "role": "ADMIN"
+    "role": "BASIC"
 }
 
 ### Link to a project

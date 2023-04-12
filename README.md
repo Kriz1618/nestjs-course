@@ -32,6 +32,19 @@
 $ npm install
 ```
 
+## Init Database
+* Inint Database
+```
+orm:init
+```
+* Create migration
+```
+npm run m:gen -- src/migrations/init
+```
+* Run migration
+```
+npm run m:run
+```
 ## Running the app
 
 ```bash

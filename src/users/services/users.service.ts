@@ -53,7 +53,8 @@ export class UsersService {
       throw ErrorManager.createSignatureError(error.message);
     }
   }
-  public async findUserById(id: string): Promise<UsersEntity> {
+
+  public async findUserById(id: String): Promise<UsersEntity> {
     try {
       const user: UsersEntity = await this.userRepository
         .createQueryBuilder('user')

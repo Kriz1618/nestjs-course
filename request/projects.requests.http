@@ -8,11 +8,12 @@ GET {{api}}/all
 GET {{api}}/8ecb9752-75c1-4c37-a32d-9775becffa18
 
 ### Create project
-POST {{api}}/create
+POST {{api}}/create/userOwner/a71e0855-0284-4ea5-9bc9-19bb47eb9a8a
+x_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiQ1JFQVRPUiIsInN1YiI6ImE3MWUwODU1LTAyODQtNGVhNS05YmM5LTE5YmI0N2ViOWE4YSIsImlhdCI6MTY4OTgwNTA4NCwiZXhwIjoxNjg5ODA4Njg0fQ.c2Mnw9GyFSjHQut0_T-YTpb7O4ZABpWXDT_P9K6nGxs
 Content-Type: application/json
 
 {
-    "name": "test project",
+    "name": "Test project 2",
     "description": "Testing projects resources"
 }
 

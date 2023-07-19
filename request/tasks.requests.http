@@ -1,0 +1,23 @@
+@api = http://localhost:3001/api/tasks
+
+
+### Login by username
+POST {{api}}/login
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "admin"
+}
+
+### Create a Task
+POST {{api}}/create/23e1a957-e584-4806-9982-a351b071bbbc
+Content-Type: application/json
+x_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiQ1JFQVRPUiIsInN1YiI6ImE3MWUwODU1LTAyODQtNGVhNS05YmM5LTE5YmI0N2ViOWE4YSIsImlhdCI6MTY4OTgwNTA4NCwiZXhwIjoxNjg5ODA4Njg0fQ.c2Mnw9GyFSjHQut0_T-YTpb7O4ZABpWXDT_P9K6nGxs
+
+{
+    "taskName": "Do something",
+    "taskDescription": "Testing task",
+    "status": "CREATED",
+    "respponsableName": "Arthur"
+}

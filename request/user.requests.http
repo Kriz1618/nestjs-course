@@ -6,10 +6,12 @@ GET {{api}}/say-hello
 
 ### Get all users
 GET {{api}}/all
-x_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiQkFTSUMiLCJzdWIiOiJhYTI1NWExZC03OGUwLTQyYTMtOTUxZS0wNWRhZjMyMzEwMzAiLCJpYXQiOjE2ODEzMjkwMDMsImV4cCI6MTY4MTMzMjYwM30.dRFE3KGOmTmp2b8Gfl8IBXe4Ezqj4Llkm2qDbw_vHmo
+# x_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiQ1JFQVRPUiIsInN1YiI6IjQ1M2VmMjVkLTNkOWQtNGNhMC05MzRlLTE4ZTAyNjEyYzQwYyIsImlhdCI6MTY4MTUwNTM0NSwiZXhwIjoxNjgxNTA4OTQ1fQ.Qn_nd3X-Ugzf2rg8GoabRYganHWb5w92QWZZR57she8
+x_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiIyYjk0ZmY4OS03MWU3LTRlZTQtOWEyNC1hYzNmNWJhMTM1MGQiLCJpYXQiOjE2ODE1MDU1NzAsImV4cCI6MTY4MTUwOTE3MH0.NOrI9OqC7Xjih0mhUFEp4ReVFoKXAmxoTHj3E8542RA
 
 ### Get user by id
-GET {{api}}/d9eef684-4c3f-4448-bd2c-eadacc8159a0
+GET {{api}}/a71e0855-0284-4ea5-9bc9-19bb47eb9a8a
+x_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiQ1JFQVRPUiIsInN1YiI6ImE3MWUwODU1LTAyODQtNGVhNS05YmM5LTE5YmI0N2ViOWE4YSIsImlhdCI6MTY4OTgwNTA4NCwiZXhwIjoxNjg5ODA4Njg0fQ.c2Mnw9GyFSjHQut0_T-YTpb7O4ZABpWXDT_P9K6nGxs
 
 ### Create user
 POST {{api}}/register
@@ -19,15 +21,30 @@ Content-Type: application/json
     "firstName": "Kriz",
     "lastName": "Marles",
     "age": 32,
-    "email": "kriz.marles@yopmail.com",
-    "username": "kriz",
+    "email": "kriz@yopmail.com",
+    "username": "admin",
     "password": "admin",
     "country": "Colombia",
-    "role": "BASIC"
+    "role": "CREATOR"
+}
+
+### Create admin user
+POST {{api}}/register
+Content-Type: application/json
+
+{
+    "firstName": "John",
+    "lastName": "Doe",
+    "age": 34,
+    "email": "jhon.doe@yopmail.com",
+    "username": "john_doe",
+    "password": "admin",
+    "country": "Colombia",
+    "role": "ADMIN"
 }
 
 ### Update user
-PUT {{api}}/edit/d9eef684-4c3f-4448-bd2c-eadacc8159a0
+PUT {{api}}/edit/453ef25d-3d9d-4ca0-934e-18e02612c40c
 Content-Type: application/json
 x_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiQkFTSUMiLCJzdWIiOiJmMzMyNTM2NS02ZTk0LTQ2M2EtODJiZi1jNzMxODc3NmJhNzMiLCJpYXQiOjE2NzkzNzE1MTcsImV4cCI6MTY3OTM3NTExN30.G_UhgX86H60pdESA5ear8K6iaTAmtahu1jITjtHNofE
 
@@ -40,7 +57,7 @@ x_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiQkFTSUMiLCJzdWIiOiJmMz
     "username": "john_doe",
     "password": "admin",
     "country": "Colombia",
-    "role": "BASIC"
+    "role": "ADMIN"
 }
 
 ### Link to a project

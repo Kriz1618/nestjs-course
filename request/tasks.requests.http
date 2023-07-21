@@ -21,3 +21,8 @@ x_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiQ1JFQVRPUiIsInN1YiI6Im
     "status": "CREATED",
     "respponsableName": "Arthur"
 }
+
+### List tasks
+GET {{api}}/list
+Content-Type: application/json
+x_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiQ1JFQVRPUiIsInN1YiI6ImE3MWUwODU1LTAyODQtNGVhNS05YmM5LTE5YmI0N2ViOWE4YSIsImlhdCI6MTY4OTg5MTc5NywiZXhwIjoxNjg5ODk1Mzk3fQ.gfd0up3bDJ31KVnxnu8HThkcahdyhBMXLA1nWPxcH5c

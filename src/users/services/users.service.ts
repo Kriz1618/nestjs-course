@@ -47,7 +47,13 @@ export class UsersService {
         .addSelect('user.password')
         .where({ [key]: value })
         .getOne();
-
+      
+      if (!user) {
+        throw new ErrorManager({
+          type: 'BAD_REQUEST',
+          message: 'User not found',
+        });
+      }
       return user;
     } catch (error) {
       throw ErrorManager.createSignatureError(error.message);

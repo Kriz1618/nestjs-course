@@ -4,6 +4,7 @@ import { AppModule } from './app.module';
 import * as morgan from 'morgan';
 import { CORS } from './constants';
 import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -27,6 +28,17 @@ async function bootstrap() {
   app.enableCors(CORS)
 
   app.setGlobalPrefix('api');
+
+  const config = new DocumentBuilder()
+    .setTitle('NestJS API')
+    .setDescription('Projects app API')
+    .setVersion('1.0')
+    // .addTag('docs')
+    .build();
+
+  const document = SwaggerModule.createDocument(app, config);
+
+  SwaggerModule.setup('docs', app, document);
 
   await app.listen(configService.get('PORT'));
 

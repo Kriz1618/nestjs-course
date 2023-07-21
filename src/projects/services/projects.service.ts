@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ErrorManager } from 'src/utils/error.manager';
+import { ErrorManager } from '../../utils/error.manager';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { ProjectDTO, ProjectUpdateDTO } from '../dto/projects.dto';
 import { ProjectsEntity } from '../entities/projects.entity';
-import { UsersProjectsEntity } from 'src/users/entities/usersProjects.entity';
-import { ACCESS_LEVEL } from 'src/constants/roles';
-import { UsersService } from 'src/users/services/users.service';
+import { UsersProjectsEntity } from '../../users/entities/usersProjects.entity';
+import { ACCESS_LEVEL } from '../../constants/roles';
+import { UsersService } from '../../users/services/users.service';
+import { HttpCustomService } from '../../providers/http/http.service';
 
 @Injectable()
 export class ProjectsService {
@@ -15,7 +16,8 @@ export class ProjectsService {
     private readonly projectRepository: Repository<ProjectsEntity>,
     @InjectRepository(UsersProjectsEntity)
     private readonly userProjectRepository: Repository<UsersProjectsEntity>,
-    private readonly usersService: UsersService
+    private readonly usersService: UsersService,
+    private readonly httpService: HttpCustomService
   ) {}
 
   public async createProject(body: ProjectDTO, userId: string): Promise<ProjectsEntity> {
@@ -103,5 +105,9 @@ export class ProjectsService {
     } catch (error) {
       throw ErrorManager.createSignatureError(error.message);
     }
+  }
+
+  public async listApi(){
+    return this.httpService.apiFindAll()
   }
 };

@@ -16,7 +16,7 @@ import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { ProjectDTO, ProjectUpdateDTO } from '../dto/projects.dto';
 import { ProjectsService } from '../services/projects.service';
 import { Roles } from 'src/auth/decorators/roles.decorator';
-import { ApiBody, ApiHeader, ApiParam, ApiTags } from '@nestjs/swagger';
+import { ApiHeader, ApiParam, ApiTags } from '@nestjs/swagger';
 import { PublicAccess } from 'src/auth/decorators/public.decorator';
 @ApiHeader({ name: 'x_token' })
 
@@ -30,7 +30,7 @@ export class ProjectsController {
   @ApiHeader({ name: 'x_token' })
   @Roles('CREATOR')
   @Post('create/userOwner/:userId')
-  public async createProject(@Body() body: ProjectDTO, @Param('userId') userId: string): Promise<import("/home/kriz/Documents/Typescript/nestjs-course/src/projects/entities/projects.entity").ProjectsEntity> {
+  public async createProject(@Body() body: ProjectDTO, @Param('userId') userId: string) {
     return await this.projectService.createProject(body, userId);
   }
 
